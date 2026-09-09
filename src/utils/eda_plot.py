@@ -12,6 +12,10 @@ def set_up_altair_browser():
     #alt.renderers.enable('mimetype') # offline renderer
     alt.data_transformers.disable_max_rows()
 
+
+def create_quan_summary(data,variable_list):
+    return data[variable_list].apply(['count','sum','mean','median','std','min','max'])
+
 def set_up_altair_jupyter():
     alt.renderers.enable('jupyter') # offline renderer
 
@@ -34,3 +38,13 @@ def create_histogram(data, var_order, bin=True):
 
        ).resolve_scale(x='independent', y='independent')
     return bar_chart
+
+def create_bar_chart(data,filter_variable):
+    data = data[data['variable'].isin(filter_variable)]
+    chart = alt.Chart(data).mark_bar().encode(
+        alt.X('variable:N').sort('-y'),
+        alt.Y('sum(value)'),
+        tooltip=['variable','sum(value)']
+
+    )
+    return chart

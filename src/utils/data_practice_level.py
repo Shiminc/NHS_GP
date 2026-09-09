@@ -7,17 +7,25 @@ import pandas as pd
 def read_practice_data(path = PATH_gp_practice):
     data = pd.read_csv(os.getcwd()+ path)
     data = data[GP_practice_variables]
-    # data['GP_FTE_patient_ratio']=data['TOTAL_GP_FTE']/data['TOTAL_PATIENTS']
+
     return data
 
+def derive_variables(data):
+    data['patient_FTE_ratio'] = data['PATIENTS']/data['GP_FTE']
+    data['foreign_quali'] = data['GP_HC'] - data['UK']
+    data['foreign_quali_prop'] = data['foreign_quali'] / data['GP_HC']
+    return data
 
 def exclude_data(data):
-    # drop 54 rows of na
+    # drop 54 rows of na, which results in GP_source only with "Fully provided" and and "Includes FTE Estimates"
     data = data.dropna()
-    # get only GP_Source = fully provided
-    data = data[data['GP_SOURCE']=='Fully provided']
+    # drop GP_source
     data.drop(columns=['GP_SOURCE'],inplace=True)
+    #  rename columns
     data.columns=GP_practice_variables_rename
+    # drop patients = 0, it might also mean the other records might be wrong too
+    data = data.loc[data['PATIENTS']>0]
+    # drop phl services, 1 GP and 58 patients. it seems it is a private contractor..services offerring nhs 
     return data
 
 
