@@ -31,7 +31,8 @@ export const drawCirclePack = (root, descendants, leaves) => {
     svg.selectAll(".pack-circle")
     .data(descendants)
     .join('circle')
-        .attr('class','pack-circle')
+        // .attr('class','pack-circle')
+        .attr('class',d=>`pack-circle ${d.depth}`)
         .attr('cx',d=>d.x)
         .attr('cy',d=>d.y)
         .attr('r',d=>d.r)
@@ -50,9 +51,19 @@ export const drawCirclePack = (root, descendants, leaves) => {
 
     // add label
     // minRadius for cicle that could show the label
-    const minRadius = 22;
-    // svg
-    //     .selectAll('.leaf-label-container')
-    //     .data(leaves.)
+    const minRadius = 18;
+    svg
+        .selectAll('.leaf-label-container')
+        .data(leaves.filter(leave => leave.r > minRadius))
+        // .data(leaves)
+        .join('foreignObject')
+            .attr('class','leaf-label-container')
+            .attr('width',d=>3*d.r)
+            .attr('height',20)
+            .attr('x', d=>d.x - 1.5*d.r)
+            .attr('y',d=>d.y - 20)
+        .append('xhtml:div')
+            .attr('class','leaf-label')
+            .text(d=>d.id)
 
 };
