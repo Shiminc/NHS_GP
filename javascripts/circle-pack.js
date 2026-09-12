@@ -46,7 +46,7 @@ export const drawCirclePack = (root, descendants, leaves) => {
                         return "white"
                 }
         })
-        .attr('stroke', d=> d.depth === 0 ? 'gray':'none');
+        // .attr('stroke', d=> d.depth === 0 ? 'gray':'none');
 
 
     // add label
@@ -61,9 +61,22 @@ export const drawCirclePack = (root, descendants, leaves) => {
             .attr('width',d=>3*d.r)
             .attr('height',20)
             .attr('x', d=>d.x - 1.5*d.r)
-            .attr('y',d=>d.y - 20)
+            .attr('y',d=>d.y)
         .append('xhtml:div')
             .attr('class','leaf-label')
             .text(d=>d.id)
 
+    svg
+        .selectAll('.role-label-container')
+        .data(descendants.filter(descendant => descendant.depth === 1 & descendant.r >20 ))
+        // .data(leaves)
+        .join('foreignObject')
+            .attr('class','role-label-container')
+            .attr('width',d=>d.r)
+            .attr('height',40)
+            .attr('x', d=>d.x - d.r/2)
+            .attr('y',d=>d.y - d.r +20)
+        .append('xhtml:div')
+            .attr('class','role-label')
+            .text(d=>d.id)
 };
