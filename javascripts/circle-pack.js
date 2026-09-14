@@ -24,6 +24,7 @@ export const drawCirclePack = (root, descendants, leaves) => {
 
     const svg = d3.select("#circle-pack")
         .append("svg")
+        .attr("id",'svg-full')
         .attr("viewBox",`0 0 ${width} ${height}`)
             .append("g")
             .attr("transform",`translate(${margin.left},${margin.top})`);
@@ -32,7 +33,7 @@ export const drawCirclePack = (root, descendants, leaves) => {
     .data(descendants)
     .join('circle')
         // .attr('class','pack-circle')
-        .attr('class',d=>`pack-circle ${d.depth}`)
+        .attr('class',d=>`pack-circle depth-${d.depth}`)
         .attr('cx',d=>d.x)
         .attr('cy',d=>d.y)
         .attr('r',d=>d.r)
@@ -52,19 +53,38 @@ export const drawCirclePack = (root, descendants, leaves) => {
     // add label
     // minRadius for cicle that could show the label
     const minRadius = 18;
-    svg
+    const leafLabelContainer = svg
         .selectAll('.leaf-label-container')
         .data(leaves.filter(leave => leave.r > minRadius))
         // .data(leaves)
         .join('foreignObject')
             .attr('class','leaf-label-container')
             .attr('width',d=>3*d.r)
-            .attr('height',20)
+            .attr('height',25)
             .attr('x', d=>d.x - 1.5*d.r)
             .attr('y',d=>d.y)
-        .append('xhtml:div')
+        
+    leafLabelContainer.append('xhtml:div')
             .attr('class','leaf-label')
+            // .style('background-color','white')
+            .text(d=>d.value)   
+            
+    leafLabelContainer.append('xhtml:div')
+            .attr('class','leaf-label-data')
+            .attr('y',d=>d.y + 20)
             .text(d=>d.id)
+
+    // leafLabel.append('tspan')
+    //         .text(d=>d.id)
+
+    // leafLabel.append('tspan')
+    //         .text(d=>d.value)
+    //         .attr('x', d=>d.x - 1.5*d.r)
+    //         .attr('transform',`translateX (${- 1.5*d.r})`)
+    //         .attr('dy','1.2em')
+
+
+
 
     svg
         .selectAll('.role-label-container')
