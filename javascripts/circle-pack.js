@@ -67,12 +67,12 @@ export const drawCirclePack = (root, descendants, leaves) => {
     leafLabelContainer.append('xhtml:div')
             .attr('class','leaf-label')
             // .style('background-color','white')
-            .text(d=>d.value)   
+            .text(d=>d.id)   
             
-    leafLabelContainer.append('xhtml:div')
-            .attr('class','leaf-label-data')
-            .attr('y',d=>d.y + 20)
-            .text(d=>d.id)
+    // leafLabelContainer.append('xhtml:div')
+    //         .attr('class','leaf-label-data')
+    //         .attr('y',d=>d.y + 20)
+    //         .text(d=>d.id)
 
     // leafLabel.append('tspan')
     //         .text(d=>d.id)

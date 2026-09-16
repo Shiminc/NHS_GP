@@ -64,29 +64,79 @@ export const drawTreeMap = (root, descendants, leaves) => {
         .attr('height',d=>d.y1-d.y0)
         .attr('stroke','black') 
         .attr('stroke-width','0.1')
-
-    nodes 
-    .append("text")
-      .attr("class", d => `treemap-label treemap-label-${d.id.replaceAll(" ", "-").replaceAll("'", "")}`)
-      .attr("x", 1)
-      .attr("y", 2)
-      .attr("fill", "white")
-      .style("font-size", "2px")
-      .style("font-weight", 500)
-      .text(d => d.id);
-
-
     
-  // Hide the labels that are larger than their parent
-  d3.selectAll(".treemap-label")
-    .style("opacity", d => {
-      const textElement = document.querySelector(`.treemap-label-${d.id.replaceAll(" ", "-").replaceAll("'", "")}`);
-      const textWidth = textElement.getBBox().width;
-      console.log(textWidth)
-      if (textWidth > (d.x1-d.x0)){
-        return 0} else {
-            return 1
-        }
-    });
+    // option 1 using text to do label
+    // nodes 
+    // .append("text")
+    //   .attr("class", d => `treemap-label treemap-label-${d.id.replaceAll(" ", "-").replaceAll("'", "")}`)
+    //   .attr("x", 1)
+    //   .attr("y", 2)
+    //   .attr("fill", "white")
+    //   .style("font-size", "1px")
+    //   .style("font-weight", 500)
+    //   .text(d => d.id)
+    //   .style("opacity",d=>{
+    //             // Hide the labels that are not fitting
+
+    //             if ((d.x1-d.x0-1)<10){
+    //                 return 0} else {
+    //               return 1
+    //             }
+    //         })
+
+    //option2: using html div to do label
+    nodes.append('foreignObject')
+            .attr('class','label-container')
+            .attr('width',d=>d.x1-d.x0-1)
+            .attr('height',d=>d.y1-d.y0)
+            .attr("x", 0.5)
+            .attr("y", 0)
+            .append('xhtml:div')
+            .attr('class','label')
+            .attr('width',d=>d.x1-d.x0-1)
+            .attr('height',d=>d.y1-d.y0)
+            // .style('background-color','white')
+            .text(d=>d.id)   
+            .style("font-size", '10%')
+            .style("opacity",d=>{
+                // Hide the labels that are not fitting
+
+                if ((d.x1-d.x0-1)<10){
+                    return 0} else {
+                  return 1
+                }
+            })
+    
+    nodes.append('foreignObject')
+            .attr('class','label-container')
+            .attr('width',d=>d.x1-d.x0-1)
+            .attr('height',d=>d.y1-d.y0)
+            .attr("x", 0.5)
+            .attr("y", 2)
+            .append('xhtml:div')
+            .attr('class','label-value')
+            .attr('width',d=>d.x1-d.x0-1)
+            .attr('height',d=>d.y1-d.y0)
+            .text(d=>d.value)   
+            .style("font-size", '10%')
+            .style("opacity",d=>{
+                // Hide the labels that are not fitting
+
+                if ((d.x1-d.x0-1)<10){
+                    return 0} else {
+                  return 1
+                }
+            })
+//   // Hide the labels that are larger than their parent
+//   d3.selectAll(".treemap-label")
+//     .style("opacity", d => {
+//       const textElement = document.querySelector(`.treemap-label-${d.id.replaceAll(" ", "-").replaceAll("'", "")}`);
+//       const textWidth = textElement.getBBox().width;
+//       console.log(textWidth)
+//       if (textWidth > (d.x1-d.x0)){
+//         return 0} else {
+//             return 1
+//         }
+//     });
 
 }

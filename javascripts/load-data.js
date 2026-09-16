@@ -2,6 +2,7 @@ import {csvToHierarchy} from './tranform-data.js';
 import {drawCirclePack} from './circle-pack.js';
 // import {handleTooltips} from './tooltips.js';
 import {drawTreeMap} from './tree-map.js';
+import {drawIcicle} from './icicle-chart.js';
 
 function dataConverter (data) {
   data.forEach(d=> {
@@ -22,7 +23,8 @@ d3.csv("./data/workforce_hierarchy.csv")
   // console.log(leaves)
   
   drawCirclePack(root, descendants, leaves);
-  drawTreeMap(root, descendants, leaves)
+  drawTreeMap(root, descendants, leaves);
+  drawIcicle(root, descendants, leaves)
   // handleTooltips()  
 
 })
