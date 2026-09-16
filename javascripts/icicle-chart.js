@@ -21,12 +21,9 @@ export const drawIcicle = (root, descendants, leaves) => {
 
     //You must call root.sum before passing the hierarchy to the pack layout. You probably also want to call root.sort to order the hierarchy before computing the layout. 
     root.sum(d=> d.staff_numbers)
-    icicleLayoutPartition(root);
-    console.log('root')
-    console.log(root)
-    console.log('root descendants')
-    console.log(root.descendants)
+    .sort((a,b)=> b.value-a.value)
 
+    const root_icicle = icicleLayoutPartition(root);
 
         const svg = d3.select("#icicle-chart")
         .append("svg")
@@ -36,7 +33,7 @@ export const drawIcicle = (root, descendants, leaves) => {
     // Append a group for each leaf
     const icicle = svg
         .selectAll(".icicle")
-        .data(root)
+        .data(root_icicle)
         .join("g")
         .attr("class", "icicle")
         .attr("transform", d => `translate(${d.x0}, ${d.y0})`);
@@ -48,10 +45,8 @@ export const drawIcicle = (root, descendants, leaves) => {
 
     icicle.append('rect')
         .attr('class','icicle-rect')
-                .attr("x", 0)
+        .attr("x", 0)
         .attr("y", 0)
-        // .attr("rx", 3)
-        // .attr("ry", 3)
         .attr('fill',d=>{
                 switch (d.depth){
                     case 1:
@@ -66,4 +61,11 @@ export const drawIcicle = (root, descendants, leaves) => {
         .attr('width',d=>d.x1-d.x0)
         .attr('height',d=>d.y1-d.y0)
         // .attr('stroke','black')
+
+    icicle.append('text')
+        .attr('class','icicle-rect-text')
+        .attr("x", -20)
+        .attr("y", 1)
+        .text(d=>d.id)
+        .style("font-size", '1px')
 }

@@ -26,3 +26,7 @@
 #toolTip-text {
   z-index: 1000;
 }
+
+.icicle-rect-text {
+  transform: rotate(-90deg);
+}

@@ -3,6 +3,7 @@ import {drawCirclePack} from './circle-pack.js';
 // import {handleTooltips} from './tooltips.js';
 import {drawTreeMap} from './tree-map.js';
 import {drawIcicle} from './icicle-chart.js';
+import {drawSunburst} from './sunburst.js';
 
 function dataConverter (data) {
   data.forEach(d=> {
@@ -24,7 +25,8 @@ d3.csv("./data/workforce_hierarchy.csv")
   
   drawCirclePack(root, descendants, leaves);
   drawTreeMap(root, descendants, leaves);
-  drawIcicle(root, descendants, leaves)
+  drawIcicle(root, descendants, leaves);
+  drawSunburst(root);
   // handleTooltips()  
 
 })
