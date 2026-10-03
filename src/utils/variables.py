@@ -11,6 +11,7 @@ PATH_gp_practice = '/data/General Practice_June 2026 Practice Level_Detailed.csv
 PATH_gp_practice_jupyter = '/../../data/General Practice_June 2026 Practice Level_Detailed.csv'
 PATH_imd = '/data/GP_imd_Oct_2025.csv'
 PATH_workforce = '/data/NHS_workforce.csv'
+PATH_geoscheme = '/data/UN_geoscheme.csv'
 PATH_nationality = '/data/FCDO_Geographical_Names_Index_July2026.csv'
 GP_practice_variables = ['PRAC_CODE','PRAC_NAME','TOTAL_PATIENTS','GP_SOURCE','TOTAL_GP_HC',
                          'TOTAL_GP_FTE','TOTAL_GP_HC_COQ_UK','TOTAL_GP_HC_COQ_EEA','TOTAL_GP_HC_COQ_EUROPE_OTHER','TOTAL_GP_HC_COQ_AFRICA','TOTAL_GP_HC_COQ_ASIA_OTHER',

@@ -5,7 +5,7 @@ import time
 import json
 import pandas as pd
 
-from utils.variables import PATH_workforce, PATH_nationality 
+from utils.variables import PATH_workforce, PATH_nationality, PATH_geoscheme
 
 def correct_nationality_area(data):
     #  congo could be drc or congo, but we deems as congo here - 258
@@ -41,7 +41,7 @@ def correct_nationality_area(data):
     {'Nationality':'Guamanian', 'id_code': 'GU', 'Name':'Guadeloupe', 'Territory':'French'},
     {'Nationality':'Hong Kong (British/Chinese)', 'id_code': 'HK', 'Name':'Hong Kong', 'Territory':'Chinese'},
     {'Nationality':'Kazakhstani', 'id_code': 'KZ', 'Name': 'Kazakhstan'},
-    {'Nationality':'Kittitian', 'id_code': 'KN', 'Name': 'St Kitts and Nevis'},
+    {'Nationality':'Kittitian', 'id_code': 'KN', 'Name': 'Saint Kitts and Nevis'},
     {'Nationality':'Korean', 'id_code': 'NONE', 'Name': 'North or South Korea'},
     {'Nationality':'Kyrgyzstani', 'id_code': 'KG', 'Name': 'Kyrgyzstan'},
     {'Nationality':'Laotian', 'id_code': 'LA', 'Name': 'Laos'},
@@ -75,7 +75,7 @@ def correct_nationality_area(data):
     {'Nationality':'Uzbekistani','id_code': 'UZ', 'Name': 'Uzbekistan'},
     {'Nationality':'Namibian','id_code': 'NA', 'Name': 'Namibia'},
     {'Nationality':'Uzbekistani','id_code': 'UZ', 'Name': 'Uzbekistan'},
-    {'Nationality':'Virgin Islander', 'id_code': 'VI', 'Name': 'United States Virgin Island','Territory':'United States'},
+    {'Nationality':'Virgin Islander', 'id_code': 'VI', 'Name': 'United States Virgin Islands','Territory':'United States'},
     ])
     
     correction_list = correction_list[['Nationality','id_code','Name']]
@@ -86,6 +86,16 @@ def correct_nationality_area(data):
 
     merged_df = merged_df.drop(columns = ['id_code_x','id_code_y','Name_x','Name_y'])
     return merged_df
+
+def read_geoscheme(path = PATH_geoscheme):
+    data = pd.read_csv(os.getcwd()+ path)
+    data['Country or Area'] = data['Country or Area'].str.strip()
+    data['Geographical subregion'] = data['Geographical subregion'].str.strip()
+    data['Continental region'] = data['Continental region'].str.strip()
+
+    # data = data[['Country code','Name','Citizen names ']]
+    # data.columns=['id_code','Name','Nationality']
+    return data
 
 def read_nationality(path = PATH_nationality):
     data = pd.read_csv(os.getcwd()+ path)
@@ -116,6 +126,14 @@ def read_workforce_data(path = PATH_workforce):
     
     # get rid of the all nationalities summation
     data = data[data['Nationality']!='All nationalities']
+
+    data.rename(columns={'All staff groups': 'All staff total',
+                         'All staff groups.1':'Professional qualified total',
+                         'All staff groups.2':'Support staff total',
+                         'All staff groups.3':'Infrastructure support total'},
+                         inplace=True
+                         )
+    data['Non doctor clinical staff total']= data['Professional qualified total'] - data['HCHS doctors - All grades']
     return data
 
 def match_nationality_country(workforce, nationality):
@@ -125,11 +143,11 @@ def match_nationality_country(workforce, nationality):
     data = pd.merge(workforce, nationality, on='Nationality',how='left')
      
     return data
-def main():
+def load_full_data():
     workforce = read_workforce_data()
     nationality = read_nationality()
+    geoscheme = read_geoscheme(path = PATH_geoscheme)
     data = match_nationality_country(workforce, nationality)
     data = correct_nationality_area(data)
-    print('finish')
-
-main()
+    data = pd.merge(data, geoscheme,left_on= 'Name', right_on='Country or Area', how='left')
+    return data

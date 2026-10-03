@@ -13,7 +13,7 @@
  Australia,Australia and New Zealand,Oceania
  Austria,Western Europe,Europe
  Azerbaijan,Western Asia,Asia
- Bahamas,Caribbean,Americas
+ The Bahamas,Caribbean,Americas
  Bahrain,Western Asia,Asia
  Bangladesh,Southern Asia,Asia
  Barbados,Caribbean,Americas
@@ -23,7 +23,7 @@
  Benin,Western Africa,Africa
  Bermuda,Northern America,Americas
  Bhutan,Southern Asia,Asia
- Bolivia (Plurinational State of),South America,Americas
+ Bolivia,South America,Americas
 " Bonaire, Sint Eustatius and Saba [Caribbean Netherlands]",Caribbean,Americas
  Bosnia and Herzegovina,Southern Europe,Europe
  Botswana,Southern Africa,Africa
@@ -35,7 +35,7 @@
  Bulgaria,Eastern Europe,Europe
  Burkina Faso,Western Africa,Africa
  Burundi,Eastern Africa,Africa
- Cabo Verde [Cape Verde],Western Africa,Africa
+Cape Verde,Western Africa,Africa
  Cambodia,South-eastern Asia,Asia
  Cameroon,Middle Africa,Africa
  Canada,Northern America,Americas
@@ -44,22 +44,23 @@
  Chad,Middle Africa,Africa
  Chile,South America,Americas
  China,Eastern Asia,Asia
-" China, Hong Kong Special Administrative Region",Eastern Asia,Asia
-" China, Macao Special Administrative Region",Eastern Asia,Asia
+Hong Kong,Eastern Asia,Asia
+Taiwan,Eastern Asia,Asia
+Macao,Eastern Asia,Asia
  Christmas Island,Australia and New Zealand,Oceania
- Cocos (Keeling) Islands,Australia and New Zealand,Oceania
+ Cocos Islands,Australia and New Zealand,Oceania
  Colombia,South America,Americas
  Comoros,Eastern Africa,Africa
- Congo [Republic of the Congo],Middle Africa,Africa
+ Congo,Middle Africa,Africa
  Cook Islands,Polynesia,Oceania
  Costa Rica,Central America,Americas
- Côte d'Ivoire [Ivory Coast],Western Africa,Africa
+Ivory Coast,Western Africa,Africa
  Croatia,Southern Europe,Europe
  Cuba,Caribbean,Americas
  Curaçao,Caribbean,Americas
  Cyprus,Western Asia,Asia
- Czechia [Czech Republic],Eastern Europe,Europe
- Democratic People's Republic of Korea [North Korea],Eastern Asia,Asia
+ Czechia,Eastern Europe,Europe
+North Korea,Eastern Asia,Asia
  Democratic Republic of the Congo [DR Congo],Middle Africa,Africa
  Denmark,Northern Europe,Europe
  Djibouti,Eastern Africa,Africa
@@ -82,7 +83,7 @@
  French Polynesia,Polynesia,Oceania
  French Southern Territories,Eastern Africa,Africa
  Gabon,Middle Africa,Africa
- Gambia,Western Africa,Africa
+The  Gambia,Western Africa,Africa
  Georgia,Western Asia,Asia
  Germany,Western Europe,Europe
  Ghana,Western Africa,Africa
@@ -93,7 +94,7 @@
  Guadeloupe,Caribbean,Americas
  Guam,Micronesia,Oceania
  Guatemala,Central America,Americas
- Guernsey,Northern Europe,Europe
+Channel Islands,Northern Europe,Europe
  Guinea,Western Africa,Africa
  Guinea-Bissau,Western Africa,Africa
  Guyana,South America,Americas
@@ -177,10 +178,10 @@ Afghanistan,Southern Asia,Asia
  Puerto Rico,Caribbean,Americas
  Qatar,Western Asia,Asia
 South Korea,Eastern Asia,Asia
- Republic of Moldova,Eastern Europe,Europe
- Réunion,Eastern Africa,Africa
+Moldova,Eastern Europe,Europe
+ Reunion,Eastern Africa,Africa
  Romania,Eastern Europe,Europe
- Russian Federation,Eastern Europe,Europe
+ Russia,Eastern Europe,Europe
  Rwanda,Eastern Africa,Africa
  Saint Barthélemy,Caribbean,Americas
 "Saint Helena, Ascension and Tristan da Cunha",Western Africa,Africa
@@ -208,7 +209,7 @@ Saint Martin (French part),Caribbean,Americas
  South Sudan,Eastern Africa,Africa
  Spain,Southern Europe,Europe
  Sri Lanka,Southern Asia,Asia
- State of Palestine,Western Asia,Asia
+Palestine,Western Asia,Asia
  Sudan,Northern Africa,Africa
  Suriname,South America,Americas
  Svalbard and Jan Mayen Islands,Northern Europe,Europe
@@ -230,10 +231,10 @@ Turkey,Western Asia,Asia
  Uganda,Eastern Africa,Africa
  Ukraine,Eastern Europe,Europe
  United Arab Emirates,Western Asia,Asia
- United Kingdom of Great Britain and Northern Ireland,Northern Europe,Europe
- United Republic of Tanzania,Eastern Africa,Africa
+ United Kingdom,Northern Europe,Europe
+Tanzania,Eastern Africa,Africa
  United States Minor Outlying Islands,Micronesia,Oceania
- United States of America,Northern America,Americas
+ United States,Northern America,Americas
  United States Virgin Islands,Caribbean,Americas
  Uruguay,South America,Americas
  Uzbekistan,Central Asia,Asia
