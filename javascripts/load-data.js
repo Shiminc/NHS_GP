@@ -4,6 +4,7 @@ import {drawCirclePack} from './circle-pack.js';
 import {drawTreeMap} from './tree-map.js';
 import {drawIcicle} from './icicle-chart.js';
 import {drawSunburst} from './sunburst.js';
+import {drawTree} from './tree-chart.js';
 
 function dataConverter (data) {
   data.forEach(d=> {
@@ -33,3 +34,10 @@ d3.csv("./data/workforce_hierarchy.csv")
 .catch(error => console.log(error));
 
 
+d3.csv("./data/workforce_hierarchy_complete.csv")
+.then(data => {
+  const dataset = dataConverter(data)
+  const [root, descendants, leaves] = csvToHierarchy(dataset);
+  drawTree(root, descendants, leaves)
+})
+.catch(error => console.log(error));
