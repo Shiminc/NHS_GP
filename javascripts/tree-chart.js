@@ -13,9 +13,13 @@ export const drawTree = (root, descendants, leaves) => {
     const innerHeight = height - margin.top - margin.bottom;
 
  
-    const treeLayoutGenerator = d3.tree()
-        .size([innerWidth, innerHeight]);
+    // normal tree
+    // const treeLayoutGenerator = d3.tree()
+    //     .size([innerWidth, innerHeight]);
     
+    // dendogram
+    const treeLayoutGenerator = d3.cluster()
+        .size([innerWidth, innerHeight])
     treeLayoutGenerator(root);
     console.log('tree')
     console.log(root)
@@ -27,12 +31,14 @@ export const drawTree = (root, descendants, leaves) => {
     .x((d)=>d.y)
     .y((d)=>d.x)
 
+    // start drawing
     const svg = d3.select("#tree-chart")
                 .append('svg')
                     .attr('viewBox',`0 0 ${width} ${height}`)
                 .append('g')
                     .attr('transform',`translate(${margin.left},${margin.top})`)
 
+    // draw tree branch
     svg.selectAll('.tree-link')
     .data(root.links())
     .join('path')
@@ -42,6 +48,7 @@ export const drawTree = (root, descendants, leaves) => {
         .attr('stroke',d=>colorScale(d.source))
         .attr('stroke-opacity',0.6)
 
+    // add labels
     svg.selectAll('.label-tree')
     .data(descendants)
     .join('text')
@@ -54,5 +61,14 @@ export const drawTree = (root, descendants, leaves) => {
         .attr('stroke-width',2)
         .style('font-size','6px')
         .text(d =>d.id)
-      
+
+    // add nodes
+    svg.selectAll('.node-tree')
+    .data(descendants)
+    .join('circle')
+    .attr('class','node-tree')
+    .attr('cx',d=>d.y)
+    .attr('cy',d=>d.x)
+    .attr('r', 1)
+    .attr('fill',d=>colorScale(d.parent))      
 }
