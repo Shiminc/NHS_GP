@@ -5,6 +5,7 @@ import {drawTreeMap} from './tree-map.js';
 import {drawIcicle} from './icicle-chart.js';
 import {drawSunburst} from './sunburst.js';
 import {drawTree} from './tree-chart.js';
+import {drawMap} from './world-map.js';
 
 function dataConverter (data) {
   data.forEach(d=> {
@@ -39,5 +40,13 @@ d3.csv("./data/workforce_hierarchy_complete.csv")
   const dataset = dataConverter(data)
   const [root, descendants, leaves] = csvToHierarchy(dataset);
   drawTree(root, descendants, leaves)
+})
+.catch(error => console.log(error));
+
+d3.json("./data/world.json")
+.then(data => {
+  console.log('earth')
+  console.log(data)
+  drawMap(data)
 })
 .catch(error => console.log(error));
