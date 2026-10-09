@@ -134,6 +134,7 @@ def read_workforce_data(path = PATH_workforce):
                          inplace=True
                          )
     data['Non doctor clinical staff total']= data['Professional qualified total'] - data['HCHS doctors - All grades']
+    data['Non doctor clinical staff total']= data['Non doctor clinical staff total'].round(2)
     return data
 
 def match_nationality_country(workforce, nationality):
@@ -151,3 +152,10 @@ def load_full_data():
     data = correct_nationality_area(data)
     data = pd.merge(data, geoscheme,left_on= 'Name', right_on='Country or Area', how='left')
     return data
+
+def read_json(path):
+    # load the json
+    with open(path, 'r') as json_file:
+        data = json.load(json_file)
+    return data
+

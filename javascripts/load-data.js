@@ -43,7 +43,7 @@ d3.csv("./data/workforce_hierarchy_complete.csv")
 })
 .catch(error => console.log(error));
 
-d3.json("./data/world.json")
+d3.json("./data/geodata_updated.json")
 .then(data => {
   console.log('earth')
   console.log(data)
