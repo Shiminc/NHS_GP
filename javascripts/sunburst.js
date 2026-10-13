@@ -1,5 +1,4 @@
-import {colorScale} from './color-data.js' 
-
+import {colorScale,colorScaleFurther } from './color-data.js' 
 
 export const drawSunburst = (root) => {
     
@@ -53,21 +52,36 @@ export const drawSunburst = (root) => {
     .data(root_graph.descendants())  // <-- 2
     .join('path')  // <-- 4
     .attr("d", arcGenerator)  // <-- 6
+    // .attr('fill',d=>{
+    //             switch (d.depth){
+    //                 case 1:
+    //                   return colorScale(d.id)
+    //                 case 2:
+    //                   return d3.interpolate(colorScale(d.parent.id),'white')(0.5)
+    //                 default:
+    //                     return "white"
+    //             }
+    //     })
     .attr('fill',d=>{
                 switch (d.depth){
                     case 1:
-                      return colorScale(d.id)
+                      return colorScaleFurther(d.id)
                     case 2:
-                      return d3.interpolate(colorScale(d.parent.id),'white')(0.5)
+                      return colorScaleFurther(d.id)
+                    case 3:
+                      return d3.interpolate(colorScaleFurther(d.parent.id),'white')(0.5)
                     default:
                         return "white"
                 }
-        })
+})
 
     const label = whole_group.selectAll("text")
     .data(root_graph.descendants())
     .join("text")
-    .text(d => d.id)
+    .text(d => {
+      if (!d.depth) return `${d.id}: ${d.value}`;
+      return `${d.id}: ${(d.value/d.parent.value * 100).toFixed(1)}%`
+    })
     .attr("transform", (d) => {
       // except base node
       // dont understand how the math works
@@ -91,6 +105,6 @@ export const drawSunburst = (root) => {
     .attr('dominant-baseline','middle')
     .attr('fill','black')
     .attr('font-family','sans-serif')
-    .attr('font-size','1px')
+    .attr('font-size','2px')
 
 }

@@ -28,7 +28,7 @@ d3.csv("./data/workforce_hierarchy.csv")
   drawCirclePack(root, descendants, leaves);
   drawTreeMap(root, descendants, leaves);
   drawIcicle(root, descendants, leaves);
-  drawSunburst(root);
+  // drawSunburst(root);
   // handleTooltips()  
 
 })
@@ -40,6 +40,8 @@ d3.csv("./data/workforce_hierarchy_complete.csv")
   const dataset = dataConverter(data)
   const [root, descendants, leaves] = csvToHierarchy(dataset);
   drawTree(root, descendants, leaves)
+  drawSunburst(root);
+
 })
 .catch(error => console.log(error));
 
