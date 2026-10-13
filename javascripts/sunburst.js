@@ -78,10 +78,6 @@ export const drawSunburst = (root) => {
     const label = whole_group.selectAll("text")
     .data(root_graph.descendants())
     .join("text")
-    .text(d => {
-      if (!d.depth) return `${d.id}: ${d.value}`;
-      return `${d.id}: ${(d.value/d.parent.value * 100).toFixed(1)}%`
-    })
     .attr("transform", (d) => {
       // except base node
       // dont understand how the math works
@@ -105,6 +101,20 @@ export const drawSunburst = (root) => {
     .attr('dominant-baseline','middle')
     .attr('fill','black')
     .attr('font-family','sans-serif')
-    .attr('font-size','2px')
+    .attr('font-size','1.8px')
+    .text(d=>{
+      if (d.id == 'Hospital Practitioner / Clinical Assistant' ||d.id == 'Other HCHS Doctor Grades'||d.id == 'Staff Grade'||d.id=='Unknown classification') return '';
+      else if (d.value<9000 & d.value>3000) return `${d.id}: ${(d.value/d.parent.value * 100).toFixed(1)}%`
+      else return d.id})
+    .append('tspan')
+    .attr("x",0)
+    .attr("dy","1em")
+    .text(d => {
+      if (!d.depth) return `${d.value}`
+      else if (d.id == 'Hospital Practitioner / Clinical Assistant' ||d.id == 'Other HCHS Doctor Grades'||d.id == 'Staff Grade'||d.id=='Unknown classification') return '';
+      else if (d.value<9000 & d.value>3000) return ''
+
+      return `${(d.value/d.parent.value * 100).toFixed(1)}%`
+    })
 
 }
